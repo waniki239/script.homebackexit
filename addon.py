@@ -15,12 +15,7 @@ ADDON_DIR = Path(
 )
 
 RESOURCE_DIR = ADDON_DIR / "resources"
-
-KEYMAP_RESOURCE = (
-    RESOURCE_DIR
-    / "keymaps"
-    / KEYMAP_NAME
-)
+KEYMAP_RESOURCE = RESOURCE_DIR / "keymaps" / KEYMAP_NAME
 
 
 def install_keymap(destination: Path) -> bool:
@@ -40,9 +35,21 @@ def remove_keymap(keymap_file: Path) -> bool:
     if not keymap_file.exists():
         return False
 
-    keymap_file.unlink()
+    try:
+        keymap_file.unlink()
+        return True
+    except OSError:
+        return False
 
-    return True
+
+def show_restart_message(message: str) -> None:
+    """Display a restart notification."""
+
+    xbmcgui.Dialog().ok(
+        "Home Back Exit",
+        f"{message}\n\n"
+        "Please restart Kodi for the changes to take effect."
+    )
 
 
 def main() -> None:
@@ -57,7 +64,6 @@ def main() -> None:
     keymap_file = keymap_dir / KEYMAP_NAME
 
     if keymap_file.exists():
-
         remove = dialog.yesno(
             "Home Back Exit",
             "Home Back Exit is already installed.\n\n"
@@ -74,12 +80,9 @@ def main() -> None:
             )
             return
 
-        dialog.ok(
-            "Home Back Exit",
-            "Home Back Exit has been removed.\n\n"
-            "Please restart Kodi for the changes to take effect."
+        show_restart_message(
+            "Home Back Exit has been removed."
         )
-
         return
 
     install = dialog.yesno(
@@ -98,10 +101,8 @@ def main() -> None:
         )
         return
 
-    dialog.ok(
-        "Home Back Exit",
-        "Home Back Exit has been installed.\n\n"
-        "Please restart Kodi for the changes to take effect."
+    show_restart_message(
+        "Home Back Exit has been installed."
     )
 
 
