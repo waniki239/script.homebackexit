@@ -34,6 +34,17 @@ def install_keymap(destination: Path) -> bool:
     )
 
 
+def remove_keymap(keymap_file: Path) -> bool:
+    """Remove the installed keymap."""
+
+    if not keymap_file.exists():
+        return False
+
+    keymap_file.unlink()
+
+    return True
+
+
 def main() -> None:
     dialog = xbmcgui.Dialog()
 
@@ -46,10 +57,29 @@ def main() -> None:
     keymap_file = keymap_dir / KEYMAP_NAME
 
     if keymap_file.exists():
+
+        remove = dialog.yesno(
+            "Home Back Exit",
+            "Home Back Exit is already installed.\n\n"
+            "Remove it?"
+        )
+
+        if not remove:
+            return
+
+        if not remove_keymap(keymap_file):
+            dialog.ok(
+                "Home Back Exit",
+                "Failed to remove Home Back Exit."
+            )
+            return
+
         dialog.ok(
             "Home Back Exit",
-            "Home Back Exit is already installed."
+            "Home Back Exit has been removed.\n\n"
+            "Please restart Kodi for the changes to take effect."
         )
+
         return
 
     install = dialog.yesno(
