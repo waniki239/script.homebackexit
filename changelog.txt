@@ -1,0 +1,7 @@
+v0.1.0
+- Initial release
+- Install Home screen Back button keymap
+- Remove installed keymap
+- Detect existing installation
+- Prompt before installation
+- Prompt to restart Kodi after changes

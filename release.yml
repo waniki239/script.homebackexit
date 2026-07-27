@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create ZIP
+        run: |
+          mkdir -p package/script.homebackexit
+
+          cp addon.py package/script.homebackexit/
+          cp addon.xml package/script.homebackexit/
+          cp changelog.txt package/script.homebackexit/
+          cp LICENSE package/script.homebackexit/
+          cp README.md package/script.homebackexit/
+
+          cp -r resources package/script.homebackexit/
+
+          cd package
+          zip -r ../script.homebackexit-${GITHUB_REF_NAME}.zip script.homebackexit
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: script.homebackexit-${{ github.ref_name }}.zip
