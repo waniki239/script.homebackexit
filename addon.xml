@@ -23,6 +23,10 @@
 
         <source>https://github.com/waniki239/service.homebackexit</source>
 
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+
         <news>
             Initial release.
         </news>
