@@ -1,38 +1,46 @@
 from pathlib import Path
 
+import xbmcaddon
 import xbmcgui
 import xbmcvfs
 
 KEYMAP_NAME = "homebackexit.xml"
 
-KEYMAP_XML = """<?xml version="1.0" encoding="UTF-8"?>
-<keymap>
-    <Home>
-        <keyboard>
-            <backspace>ActivateWindow(shutdownmenu)</backspace>
-            <escape>ActivateWindow(shutdownmenu)</escape>
-        </keyboard>
+ADDON = xbmcaddon.Addon()
 
-        <remote>
-            <back>ActivateWindow(shutdownmenu)</back>
-        </remote>
-    </Home>
-</keymap>
-"""
+ADDON_DIR = Path(
+    xbmcvfs.translatePath(
+        ADDON.getAddonInfo("path")
+    )
+)
+
+RESOURCE_DIR = ADDON_DIR / "resources"
+
+KEYMAP_RESOURCE = (
+    RESOURCE_DIR
+    / "keymaps"
+    / KEYMAP_NAME
+)
 
 
-def install_keymap(keymap_file: Path) -> None:
-    """Install the Home Back Exit keymap."""
+def install_keymap(destination: Path) -> bool:
+    """Install the bundled keymap."""
 
-    keymap_file.parent.mkdir(parents=True, exist_ok=True)
-    keymap_file.write_text(KEYMAP_XML, encoding="utf-8")
+    destination.parent.mkdir(parents=True, exist_ok=True)
+
+    return xbmcvfs.copy(
+        str(KEYMAP_RESOURCE),
+        str(destination),
+    )
 
 
 def main() -> None:
     dialog = xbmcgui.Dialog()
 
     keymap_dir = Path(
-        xbmcvfs.translatePath("special://masterprofile/keymaps")
+        xbmcvfs.translatePath(
+            "special://masterprofile/keymaps"
+        )
     )
 
     keymap_file = keymap_dir / KEYMAP_NAME
@@ -46,15 +54,19 @@ def main() -> None:
 
     install = dialog.yesno(
         "Home Back Exit",
-        "Home Back Exit is not installed.",
-        "",
+        "Home Back Exit is not installed.\n\n"
         "Install now?"
     )
 
     if not install:
         return
 
-    install_keymap(keymap_file)
+    if not install_keymap(keymap_file):
+        dialog.ok(
+            "Home Back Exit",
+            "Failed to install Home Back Exit."
+        )
+        return
 
     dialog.ok(
         "Home Back Exit",
