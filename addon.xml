@@ -1,30 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<addon id="service.homebackexit"
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="script.homebackexit"
        name="Home Back Exit"
        version="0.1.0"
        provider-name="waniki239">
 
-    <extension point="xbmc.keymap">
-        <keymap>keymaps/homeback.xml</keymap>
+    <requires>
+        <import addon="xbmc.python" version="3.0.1"/>
+    </requires>
+
+    <extension point="xbmc.python.script"
+               library="addon.py">
+        <provides>executable</provides>
     </extension>
 
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">
-            Opens the shutdown menu when Back is pressed on the Home screen.
+            Install a Home screen Back button keymap.
         </summary>
 
         <description lang="en_GB">
-            A lightweight Kodi addon that remaps the Back button on the Home screen to open the shutdown menu, while leaving the Back button unchanged everywhere else.
+            Installs a keymap that opens the Shutdown Menu when the Back button is pressed on Kodi's Home screen.
         </description>
 
         <platform>all</platform>
 
         <license>MIT</license>
 
-        <source>https://github.com/waniki239/service.homebackexit</source>
+        <source>https://github.com/waniki239/script.homebackexit</source>
 
         <assets>
             <icon>resources/icon.png</icon>
+            <fanart>resources/fanart.jpg</fanart>
         </assets>
 
         <news>
