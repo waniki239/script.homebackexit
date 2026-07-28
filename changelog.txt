@@ -1,3 +1,7 @@
+v0.1.1
+- Fix metadata formatting in addon.xml
+- Fix description indentation in Kodi Estuary
+
 v0.1.0
 - Initial release
 - Install Home screen Back button keymap
