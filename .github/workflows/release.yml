@@ -29,7 +29,8 @@ jobs:
           cp -r resources package/script.homebackexit/
 
           cd package
-          zip -r ../script.homebackexit-${GITHUB_REF_NAME}.zip script.homebackexit
+          VERSION=${GITHUB_REF_NAME#v}
+          zip -r ../script.homebackexit-${VERSION}.zip script.homebackexit
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
