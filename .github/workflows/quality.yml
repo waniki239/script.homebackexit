@@ -19,6 +19,12 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install Ruff
+        run: pip install ruff
+
+      - name: Run Ruff
+        run: ruff check .
+
       - name: Check Python syntax
         run: |
           python -m py_compile addon.py
