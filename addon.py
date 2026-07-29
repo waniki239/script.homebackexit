@@ -1,8 +1,6 @@
 import sys
 
-from lib import exit_dialog
-from lib import installer
-
+from lib import exit_dialog, installer
 
 def main() -> None:
     if len(sys.argv) > 1 and sys.argv[1] == "exit":
