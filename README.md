@@ -3,7 +3,7 @@
 ![Kodi](https://img.shields.io/badge/Kodi-21%20(Omega)-17B2E7)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-A lightweight Kodi addon that installs a keymap to open the **Shutdown Menu** when the **Back** button is pressed on the Kodi Home screen.
+A lightweight Kodi addon that installs a keymap to open the **Exit confirmation dialog** when the **Back** button is pressed on the Kodi Home screen.
 
 ---
 

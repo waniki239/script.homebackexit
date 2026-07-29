@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="script.homebackexit"
        name="Home Back Exit"
-       version="0.1.1"
+       version="0.2.0"
        provider-name="waniki239">
 
     <requires>
@@ -30,7 +30,9 @@
         </assets>
 
         <news>
-            Initial release.
+            v0.2.0
+            - Replaced the Shutdown Menu with an exit confirmation dialog.
+            - Refactored the addon into installer and exit dialog modules.
         </news>
     </extension>
 

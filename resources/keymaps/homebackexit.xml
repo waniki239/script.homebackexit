@@ -1,12 +1,12 @@
 <keymap>
     <Home>
         <keyboard>
-            <backspace>ActivateWindow(shutdownmenu)</backspace>
-            <escape>ActivateWindow(shutdownmenu)</escape>
+            <backspace>RunScript(script.homebackexit,exit)</backspace>
+            <escape>RunScript(script.homebackexit,exit)</escape>
         </keyboard>
 
         <remote>
-            <back>ActivateWindow(shutdownmenu)</back>
+            <back>RunScript(script.homebackexit,exit)</back>
         </remote>
     </Home>
 </keymap>
